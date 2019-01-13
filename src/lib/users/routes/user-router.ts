@@ -39,7 +39,7 @@ class UserRouter {
         );
         this.router.delete("/:id", UserController.deleteUser);
         this.router.put("/:id",
-            CheckRoleMiddleware.checkRole(Role.User),
+            CheckRoleMiddleware.checkRole(Role.User, Role.Admin),
             (req, res, next) => {
                 upload(req, res, (err) => {
 

@@ -31,9 +31,6 @@ export const Organisation = db.define<IOrganisation, IOrganisation>("organisatio
     },
     description: {
         type: Sequelize.STRING,
-        validate: {
-            len: [3, 255],
-        },
     },
     address: {
         type: Sequelize.STRING,

@@ -30,7 +30,7 @@ export class AuthController {
         return passport.authenticate("userlogin", async (err: Error, user: IUser) => {
             try {
                 if (err || !user) {
-                    throw new Error("500");
+                    res.sendStatus(404);
                 }
                 req.login(user, { session: false }, async (error) => {
                     if (error) {
@@ -55,7 +55,7 @@ export class AuthController {
         return passport.authenticate("organisationlogin", async (err: Error, organisation: IOrganisation) => {
             try {
                 if (err || !organisation) {
-                    throw new Error("500");
+                    res.sendStatus(404);
                 }
                 req.login(organisation, { session: false }, async (error) => {
                     if (error) {

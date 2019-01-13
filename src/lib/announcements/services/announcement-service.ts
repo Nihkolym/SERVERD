@@ -1,12 +1,15 @@
 import { User } from "./../../users/models/User";
 import { IAnnouncement, Announcement } from "../models/Announcement";
 import { Status } from "../models/status";
+import { Op } from "sequelize";
 
 export class AnnouncementService {
     public static async getAllAnnouncements(): Promise<IAnnouncement[]> {
         return await Announcement.findAll({
             where: {
-                status: 1,
+                status: {
+                    [Op.in]: [1, 2],
+                },
             },
             include: [
                 {

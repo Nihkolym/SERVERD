@@ -7,6 +7,7 @@ import announcementRouter from "../../../lib/announcements/routes/announcement-r
 import organisationRouter from "../../../lib/organisations/routes/organisation-router";
 import * as passport from "passport";
 import * as path from "path";
+import { NextFunction } from "connect";
 
 export class Server {
     public app: Application;

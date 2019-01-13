@@ -10,6 +10,14 @@ export default class OrganisationController {
         res.status(200).send(organisations);
     }
 
+    public static async getMyOrganisations(req: Request, res: Response): Promise<void> {
+        const token = req.headers.authorization;
+
+        const organisation = await OrganisationService.getOrganisationByToken(token);
+
+        res.status(200).send(organisation);
+    }
+
     public static async getOrganisation(req: Request, res: Response): Promise<void> {
         const organisationId = req.params.id;
 

@@ -1,3 +1,5 @@
+import { Address } from './../models/Organisation';
+import { IAddress } from "../models/Organisation";
 import { Organisation, IOrganisation } from "../models/Organisation";
 import * as jwt from "jsonwebtoken";
 import { State } from "../models/state";
@@ -43,6 +45,10 @@ export class OrganisationService {
         if (!res) {
             throw new Error("500");
         }
+    }
+
+    public static async addAddress(address: IAddress) {
+        return await Address.create(address);
     }
 
     public static async updateOrganisation(model: IOrganisation, organisationId: number): Promise<void> {

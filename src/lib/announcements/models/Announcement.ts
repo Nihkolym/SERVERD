@@ -8,6 +8,9 @@ export interface IAnnouncement {
     title: string;
     photo: string;
     geolocation: string;
+    city: string;
+    lng: string;
+    lat: string;
     description: string;
     status: number;
     organizationId: number;
@@ -43,6 +46,15 @@ export const Announcement = db.define<IAnnouncement, IAnnouncement>("announcemen
         validate: {
             len: [3, 255],
         },
+    },
+    lat: {
+        type: Sequelize.STRING,
+    },
+    lng: {
+        type: Sequelize.STRING,
+    },
+    city: {
+        type: Sequelize.STRING,
     },
     ownerId: {
         type: Sequelize.INTEGER,

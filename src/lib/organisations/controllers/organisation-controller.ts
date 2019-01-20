@@ -1,3 +1,4 @@
+import { Organisation } from './../models/Organisation';
 import { Request, Response } from "express";
 import { OrganisationService } from "../services/organisation-service";
 import { IOrganisation } from "../models/Organisation";
@@ -37,6 +38,12 @@ export default class OrganisationController {
     public static async updateOrganisation(req: Request, res: Response): Promise<void> {
         const organisationId = req.params.id;
         const model = req.body;
+
+        if (req.body.addressObj) {
+            const address = JSON.parse(req.body.addressObj);
+
+            model.addressId = (await OrganisationService.addAddress(address)).id;
+        }
 
         await OrganisationService.updateOrganisation(model, organisationId);
 

@@ -1,6 +1,13 @@
 import db from "../../db/models/db";
 import * as Sequelize from "sequelize";
 
+export interface IAddress {
+    id?: number;
+    lat: number;
+    lng: number;
+    city: string;
+}
+
 export interface IOrganisation {
     id?: number;
     email: string;
@@ -10,10 +17,23 @@ export interface IOrganisation {
     description?: string;
     logo?: string;
     address?: string;
+    addressObj?: IAddress;
     role: number;
     active: number;
     certificate: string;
 }
+
+export const Address = db.define<IAddress, IAddress>("address", {
+    lat: {
+        type: Sequelize.DECIMAL,
+    },
+    lng: {
+        type: Sequelize.DECIMAL,
+    },
+    city: {
+        type: Sequelize.STRING,
+    },
+});
 
 export const Organisation = db.define<IOrganisation, IOrganisation>("organisation", {
     id: {
@@ -29,10 +49,10 @@ export const Organisation = db.define<IOrganisation, IOrganisation>("organisatio
             isEmail: true,
         },
     },
-    description: {
+    address: {
         type: Sequelize.STRING,
     },
-    address: {
+    description: {
         type: Sequelize.STRING,
     },
     name: {
@@ -74,3 +94,6 @@ export const Organisation = db.define<IOrganisation, IOrganisation>("organisatio
         allowNull: false,
     },
 });
+
+Organisation.belongsTo(Organisation);
+Address.hasOne(Organisation);
